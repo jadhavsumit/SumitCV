@@ -39,9 +39,23 @@ const revealObserver = new IntersectionObserver(
 );
 
 reveals.forEach((element, index) => {
-  element.style.transitionDelay = `${Math.min(index % 4, 3) * 70}ms`;
+  element.style.transitionDelay = `${Math.min(index % 4, 3) * 120}ms`;
   revealObserver.observe(element);
 });
+
+const timelineRows = document.querySelectorAll(".timeline-row");
+const timelineObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("visible");
+      timelineObserver.unobserve(entry.target);
+    });
+  },
+  { threshold: 0.12, rootMargin: "0px 0px -60px" }
+);
+
+timelineRows.forEach((row) => timelineObserver.observe(row));
 
 const counterObserver = new IntersectionObserver(
   (entries) => {
@@ -70,14 +84,28 @@ const counterObserver = new IntersectionObserver(
 counters.forEach((counter) => counterObserver.observe(counter));
 
 if (window.matchMedia("(pointer: fine)").matches) {
+  let targetX = window.innerWidth / 2;
+  let targetY = window.innerHeight / 2;
+  let x = targetX;
+  let y = targetY;
+
   window.addEventListener(
     "pointermove",
     (event) => {
-      cursorGlow.style.left = `${event.clientX}px`;
-      cursorGlow.style.top = `${event.clientY}px`;
+      targetX = event.clientX;
+      targetY = event.clientY;
     },
     { passive: true }
   );
+
+  const animateGlow = () => {
+    x += (targetX - x) * 0.055;
+    y += (targetY - y) * 0.055;
+    cursorGlow.style.transform = `translate(${x - 240}px, ${y - 240}px)`;
+    requestAnimationFrame(animateGlow);
+  };
+
+  animateGlow();
 } else {
   cursorGlow.remove();
 }
