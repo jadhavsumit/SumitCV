@@ -58,7 +58,7 @@ button {
 
 .cursor-glow {
   position: fixed;
-  z-index: -1;
+  z-index: 1;
   width: 480px;
   height: 480px;
   border-radius: 50%;
@@ -66,6 +66,7 @@ button {
   filter: blur(80px);
   pointer-events: none;
   will-change: transform;
+  mix-blend-mode: screen;
   transition: opacity 0.3s ease;
 }
 
@@ -1331,6 +1332,18 @@ footer > div:first-child {
   .credential:nth-child(4) {
     border-top: 1px solid #d2d0c9;
   }
+
+  .pipeline-flow {
+    grid-template-columns: 1fr 32px 1fr 32px 1fr;
+  }
+
+  .pipeline-connector {
+    width: 32px;
+  }
+
+  .pipeline-parallel .pipeline-step {
+    min-height: 88px;
+  }
 }
 
 @media (max-width: 720px) {
@@ -1459,18 +1472,26 @@ footer > div:first-child {
   }
 
   .pipeline-flow {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+    grid-template-columns: 1fr;
+    gap: 10px;
     margin-top: 24px;
   }
 
-  .pipeline-flow > i {
+  .pipeline-connector {
     display: none;
+  }
+
+  .pipeline-parallel {
+    gap: 10px;
+  }
+
+  .pipeline-parallel .pipeline-step {
+    min-height: 78px;
   }
 
   .pipeline-step {
     min-height: 78px;
-    padding: 10px;
+    padding: 12px 14px;
   }
 
   .pipeline-step > span {
@@ -1478,7 +1499,13 @@ footer > div:first-child {
   }
 
   .pipeline-status {
-    display: none;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .intro-bullets li {
+    font-size: 13px;
   }
 
   .research-frame,
@@ -1535,6 +1562,118 @@ footer > div:first-child {
     gap: 22px;
     padding-right: 6vw;
     padding-left: 6vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 75px 5vw;
+  }
+
+  .site-header {
+    padding-right: 5vw;
+    padding-left: 5vw;
+  }
+
+  .hero {
+    padding-top: 115px;
+  }
+
+  .hero-title {
+    font-size: clamp(2.7rem, 17vw, 3.8rem);
+    line-height: 0.9;
+    letter-spacing: -0.06em;
+  }
+
+  .hero-copy {
+    font-size: 0.9rem;
+    margin-top: 24px;
+  }
+
+  .button {
+    width: 100%;
+    min-width: unset;
+    justify-content: space-between;
+  }
+
+  .section-heading {
+    font-size: clamp(1.9rem, 13vw, 3rem);
+    letter-spacing: -0.05em;
+  }
+
+  .intro-bullets li {
+    font-size: 12.5px;
+    line-height: 1.7;
+  }
+
+  .stat-number,
+  .stat-suffix {
+    font-size: clamp(2.6rem, 15vw, 4rem);
+  }
+
+  .timeline-meta h3 {
+    font-size: 18px;
+  }
+
+  .tag-list span {
+    font-size: 8px;
+    padding: 5px 8px;
+  }
+
+  .pipeline-shell {
+    padding: 16px 12px;
+  }
+
+  .pipeline-heading strong {
+    font-size: 15px;
+  }
+
+  .pipeline-step strong {
+    font-size: 12px;
+  }
+
+  .pipeline-step small {
+    font-size: 7.5px;
+  }
+
+  .project-visual,
+  .project-card-large .project-visual {
+    min-height: 300px;
+  }
+
+  .browser-frame {
+    width: 95%;
+    min-height: 220px;
+    border-width: 4px;
+  }
+
+  .research-frame,
+  .health-frame {
+    width: 92%;
+  }
+
+  .skill-row h3 {
+    font-size: 13px;
+  }
+
+  .skill-row p {
+    font-size: 11px;
+  }
+
+  .contact h2 {
+    font-size: clamp(2.4rem, 15vw, 4rem);
+    margin-bottom: 40px;
+  }
+
+  .contact-link {
+    font-size: 11px;
+    width: 100%;
+  }
+
+  .contact-orb {
+    right: -50vw;
+    width: 110vw;
+    height: 110vw;
   }
 }
 
